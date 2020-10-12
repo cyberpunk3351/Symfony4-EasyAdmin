@@ -59,6 +59,19 @@ class DefaultController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/published", name="published")
+     * @param Post $post
+     * @param $published
+     * @return Response
+     */
+    public function published(Post $post, $published)
+    {
+        return $this->render('default/category.html.twig', [
+            'posts' => $this->getDoctrine()->getManager()->getRepository(Post::class)->findBy(['published' => $published])
+        ]);
+    }
+
 
     /**
      * @Route("/tag/{id}", name="tag", methods={"GET"})
