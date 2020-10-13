@@ -48,6 +48,20 @@ class DefaultController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/published", name="published")
+     */
+    public function published()
+    {
+        return $this->render('home/home.html.twig', [
+            'post' => $this->getDoctrine()->getManager()->getRepository(Post::class)->findBy(['published' => 1])
+
+        ]);
+    }
+
+
+
     /**
      * @Route("/category/{category}", name="category")
      */
@@ -58,20 +72,6 @@ class DefaultController extends AbstractController
             'posts' => $this->getDoctrine()->getManager()->getRepository(Post::class)->findBy(['category' => $category])
         ]);
     }
-
-    /**
-     * @Route("/published", name="published")
-     * @param Post $post
-     * @param $published
-     * @return Response
-     */
-    public function published(Post $post, $published)
-    {
-        return $this->render('default/category.html.twig', [
-            'posts' => $this->getDoctrine()->getManager()->getRepository(Post::class)->findBy(['published' => $published])
-        ]);
-    }
-
 
     /**
      * @Route("/tag/{id}", name="tag", methods={"GET"})
