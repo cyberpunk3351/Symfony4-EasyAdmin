@@ -23,14 +23,14 @@ class DefaultController extends AbstractController
     {
 
         $em = $this->getDoctrine()->getManager();
-        $post = $em->getRepository(Post::class)->findAll();
+//        $post = $em->getRepository(Post::class)->findAll();
         $menu = $em->getRepository(Menu::class)->findAll();
         $tag = $em->getRepository(Tag::class)->findAll();
 
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
-            'post'=>$post,
+            'post' => $this->getDoctrine()->getManager()->getRepository(Post::class)->findBy(['published' => 1]),
             'menu'=>$menu,
             'tag'=>$tag,
         ]);
@@ -47,19 +47,6 @@ class DefaultController extends AbstractController
 
         ]);
     }
-
-
-    /**
-     * @Route("/published", name="published")
-     */
-    public function published()
-    {
-        return $this->render('home/home.html.twig', [
-            'post' => $this->getDoctrine()->getManager()->getRepository(Post::class)->findBy(['published' => 1])
-
-        ]);
-    }
-
 
 
     /**
