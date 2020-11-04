@@ -10,6 +10,7 @@ use Doctrine\DBAL\Types\TextType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
@@ -37,13 +38,13 @@ class PostCrudController extends AbstractCrudController
         $image = ImageField::new('thumbnails')->setBasePath('/uploads/files');
         $fields = [
             IdField::new('id')->hideOnForm(),
+            BooleanField::new('published'),
             AssociationField::new('category'),
             AssociationField::new('tags')->setFormTypeOptions([
                 'by_reference' => false,
             ]),
             TextField::new('title'),
             TextEditorField::new('content'),
-            Field::new('published'),
             DateTimeField::new('createdAt')
         ];
 
